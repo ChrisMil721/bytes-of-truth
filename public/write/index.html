@@ -1,0 +1,31 @@
+<head>
+    <html lang="en">
+    <meta charset="utf-8">
+</head>
+<body>
+<h1>bytes of truth</h1>
+<p>"For a time is coming when people will no longer listen to sound and wholesome teaching. They will follow their own desires and will look for teachers who will tell them whatever their itching ears want to hear. They will reject the truth and chase after myths."
+</br>2 Timothy 4:3-4 </p>
+<form id="tweetform"><label for="tweet">what should I tweet?</label></br>
+<input type="text" id="tweet" name="tweet" value=""> 
+<button id="submit">submit</button></form>
+<button><a href="../../index.html">home</a></button></br>
+<script>
+    const button = document.getElementById('submit');
+    button.addEventListener('click', async event => {
+        const tweet = document.getElementById('tweet').value;
+        const data = { tweet };
+        const options = {
+            method: 'POST',
+            headers: {'content-type' : 'application/json'}, 
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('/drafts', options);
+        const json = await response.json();
+        document.getElementById("tweetform").reset();
+        console.log(json);
+    });
+   // function clearForm(){document.getElementById('submit').reset();}
+   // button.addEventListener('click', clearForm());
+</script>
+</body>
